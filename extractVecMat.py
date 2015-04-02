@@ -76,9 +76,10 @@ def main():
                 try:
                     wordvec = model[classname]
                     idx = 0
-                    break
+                    #break
                 except:
-                    continue
+                    pass
+                    #continue
                     #print classname
                     
                 #if classname not in model.keys():
