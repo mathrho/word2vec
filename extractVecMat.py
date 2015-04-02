@@ -69,7 +69,7 @@ def main():
         target = synsets.find(".//synset[@wnid='" + classid + "']")
         classnames = target.get('words').split(', ')
         for classname in classnames:
-            classname = '/en/' + classname.repace(' ', '_')
+            classname = '/en/' + classname.replace(' ', '_')
             if classname not in model.keys():
                 print classname
 
