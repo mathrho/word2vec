@@ -70,8 +70,12 @@ def main():
         classnames = target.get('words').split(', ')
         for classname in classnames:
             classname = '/en/' + classname.replace(' ', '_')
-            if classname not in model.keys():
+            try:
+                wordvec = model[classname]
+            except:
                 print classname
+            #if classname not in model.keys():
+            #    print classname
 
 
 
