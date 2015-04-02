@@ -68,7 +68,7 @@ def main():
                 #print parent.get('words')
 
         target = synsets.find(".//synset[@wnid='" + classid + "']")
-        if not target:
+        if target:
             classnames = target.get('words').split(', ')
             for classname in classnames:
                 classname = '/en/' + classname.replace(' ', '_')
