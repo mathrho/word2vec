@@ -57,6 +57,7 @@ def main():
 
     ##############
     parent_map = get_parentmap(tree)
+    cc = 0
     for classid in open('synsets.txt', 'r').readlines():
         classid = classid.strip()
 
@@ -66,18 +67,19 @@ def main():
             #for parent in parent_map[target]:
                 #print parent.get('words')
 
-        target = synsets.find(".//synset[@wnid='" + classid + "']")
+        if target = synsets.find(".//synset[@wnid='" + classid + "']"):
         classnames = target.get('words').split(', ')
-        for classname in classnames:
-            classname = '/en/' + classname.replace(' ', '_')
-            try:
-                wordvec = model[classname]
-            except:
-                print classname
-            #if classname not in model.keys():
-            #    print classname
+            for classname in classnames:
+                classname = '/en/' + classname.replace(' ', '_')
+                try:
+                    wordvec = model[classname]
+                except:
+                    print classname
+                    cc = cc + 1
+                #if classname not in model.keys():
+                #    print classname
 
-
+    print cc
 
 if __name__ == "__main__":
     main()
