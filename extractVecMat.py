@@ -67,7 +67,7 @@ def main():
             #for parent in parent_map[target]:
                 #print parent.get('words')
 
-        target = synsets.find(".//synset[@wnid='" + classid + "']")
+        target = root.find(".//synset[@wnid='" + classid + "']")
         if target:
             classnames = target.get('words').split(', ')
             for classname in classnames:
