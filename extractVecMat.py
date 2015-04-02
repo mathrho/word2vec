@@ -5,44 +5,75 @@ import sys
 import os
 from xml.etree import ElementTree
 
-##############
-imgnet_xml_file = 'structure_released.xml'
-tree = ElementTree.parse(imgnet_xml_file)
-
-root = tree.getroot()
-release_data = root[0].text
-synsets = root[1]
-##
-for child in synsets.iter():
-    if len(child) > 0:
-        continue
-        #wnid = child.attrib.get("wnid")
-        #imagepath = get_imagepath(wnid)
-        #if not os.path.exists(imagepath) or os.path.getsize(imagepath) == 0:
-        #    params = {
-        #    "wnid": wnid,
-        #    "username": config.username,
-        #    "accesskey": config.accesskey,
-        #    "release": "latest",
-        #    }
-        #    download_file(config.synset_url, imagepath, params)
+def get_parentmap(tree):
+    parent_map = {}
+    for p in tree.iter():
+        for c in p:
+            if c in parent_map:
+                parent_map[c].append(p)
+                # Or raise, if you don't want to allow this.
+            else:
+                parent_map[c] = [p]
+                # Or parent_map[c] = p if you don't want to allow this
+    return parent_map
 
 
-##############
-#logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+def main():
 
-#pretrained_model = './vectors.bin'
-#pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
-#pretrained_model = '../GoogleNews-vectors-negative300.bin'
-#model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
-#model['animal']
-#print model.similarity('/en/dog', '/en/cat')
-#print model.similarity('/en/dog', '/en/mountain')
+    ##############
+    imgnet_xml_file = 'structure_released.xml'
+    tree = ElementTree.parse(imgnet_xml_file)
+
+    root = tree.getroot()
+    release_data = root[0].text
+    synsets = root[1]
+    ##
+    #for child in synsets.iter():
+    #    if len(child) > 0:
+    #        continue
+            #wnid = child.attrib.get("wnid")
+            #imagepath = get_imagepath(wnid)
+            #if not os.path.exists(imagepath) or os.path.getsize(imagepath) == 0:
+            #    params = {
+            #    "wnid": wnid,
+            #    "username": config.username,
+            #    "accesskey": config.accesskey,
+            #    "release": "latest",
+            #    }
+            #    download_file(config.synset_url, imagepath, params)
 
 
-##############
-for classid in open('synsets.txt', 'r').readlines():
-    classid = classid.strip()
+    ##############
+    logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
+    #pretrained_model = './vectors.bin'
+    pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
+    #pretrained_model = '../GoogleNews-vectors-negative300.bin'
+    model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
+    #model['animal']
+    #print model.similarity('/en/dog', '/en/cat')
+    #print model.similarity('/en/dog', '/en/mountain')
+
+
+    ##############
+    parent_map = get_parentmap(tree)
+    for classid in open('synsets.txt', 'r').readlines():
+        classid = classid.strip()
+
+        #classid = 'n01807828'
+        #for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
+            #print target.get('words')
+            #for parent in parent_map[target]:
+                #print parent.get('words')
+
+        target = synsets.find(".//synset[@wnid='" + classid + "']")
+        classnames = target.get('words').split(', ')
+        for classname in classnames:
+            classname = '/en/' + classname.repace(' ', '_')
+            if classname not in model.keys():
+                print classname
 
 
 
+if __name__ == "__main__":
+    main()
