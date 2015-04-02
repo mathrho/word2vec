@@ -79,6 +79,9 @@ def main():
                     cc = cc + 1
                 #if classname not in model.keys():
                 #    print classname
+        else:
+            print classid
+            cc = cc + 1
 
     print cc
 
