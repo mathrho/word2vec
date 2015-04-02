@@ -70,16 +70,21 @@ def main():
         for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
         #if target:
             classnames = target.get('words').split(', ')
+            idx = 1
             for classname in classnames:
                 classname = '/en/' + classname.replace(' ', '_')
                 try:
                     wordvec = model[classname]
+                    idx = 0
+                    break
                 except:
-                    print classname
-                    cc = cc + 1
+                    continue
+                    #print classname
+                    
                 #if classname not in model.keys():
                 #    print classname
 
+            cc = cc + idx
             break
         #else:
         #    print classid
