@@ -67,10 +67,10 @@ def main():
             #for parent in parent_map[target]:
                 #print parent.get('words')
 
+        idx = 1
         for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
         #if target:
             classnames = target.get('words').split(', ')
-            idx = 1
             for classname in classnames:
                 classname = '/en/' + classname.replace(' ', '_')
                 #classname = classname.replace(' ', '_')
@@ -84,13 +84,27 @@ def main():
                     #print classname
                     
                 #if classname not in model.keys():
-                #    print classname
-
-            cc = cc + idx
+                #   print classname
             break
         #else:
         #    print classid
         #    cc = cc + 1
+
+        if idx:
+            for parent in parent_map[target]:
+                classnames = parent.get('words').split(', ')
+                for classname in classnames:
+                    classname = '/en/' + classname.replace(' ', '_')
+                    #classname = classname.replace(' ', '_')
+                    try:
+                        wordvec = model[classname]
+                        idx = 0
+                        #break
+                    except:
+                        pass
+                break
+                
+        cc = cc + idx
 
     print cc
 
