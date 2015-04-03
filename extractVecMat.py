@@ -72,8 +72,8 @@ def main():
         #if target:
             classnames = target.get('words').split(', ')
             for classname in classnames:
-                classname = '/en/' + classname.replace(' ', '_')
-                #classname = classname.replace(' ', '_')
+                #classname = '/en/' + classname.replace(' ', '_')
+                classname = classname.replace(' ', '_')
                 try:
                     wordvec = model[classname]
                     idx = 0
@@ -94,8 +94,8 @@ def main():
             for parent in parent_map[target]:
                 classnames = parent.get('words').split(', ')
                 for classname in classnames:
-                    classname = '/en/' + classname.replace(' ', '_')
-                    #classname = classname.replace(' ', '_')
+                    #classname = '/en/' + classname.replace(' ', '_')
+                    classname = classname.replace(' ', '_')
                     try:
                         wordvec = model[classname]
                         idx = 0
