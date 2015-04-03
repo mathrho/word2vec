@@ -56,6 +56,7 @@ def main():
 
 
     ##############
+    fp = open('./synset-missing-GoogleNews.txt', 'w')
     parent_map = get_parentmap(tree)
     cc = 0
     for classid in open('synsets.txt', 'r').readlines():
@@ -104,9 +105,13 @@ def main():
                         pass
                 break
 
+        if idx:
+            fp.write(classid + '\n')
+        
         cc = cc + idx
 
     print cc
+    fp.close()
 
 if __name__ == "__main__":
     main()
