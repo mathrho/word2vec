@@ -47,8 +47,8 @@ def main():
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
     #pretrained_model = './vectors.bin'
-    #pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
-    pretrained_model = '../GoogleNews-vectors-negative300.bin'
+    pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
+    #pretrained_model = '../GoogleNews-vectors-negative300.bin'
     model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
     #model['animal']
     #print model.similarity('/en/dog', '/en/cat')
@@ -56,7 +56,8 @@ def main():
 
 
     ##############
-    fp = open('./synset-missing-GoogleNews.txt', 'w')
+    #fp = open('./synset-missing-GoogleNews.txt', 'w')
+    fp = open('./synset-missing-freebase.txt', 'w')
     parent_map = get_parentmap(tree)
     cc = 0
     for classid in open('synsets.txt', 'r').readlines():
@@ -73,8 +74,8 @@ def main():
         #if target:
             classnames = target.get('words').split(', ')
             for classname in classnames:
-                #classname = '/en/' + classname.replace(' ', '_')
-                classname = classname.replace(' ', '_')
+                classname = '/en/' + classname.replace(' ', '_')
+                #classname = classname.replace(' ', '_')
                 try:
                     wordvec = model[classname]
                     idx = 0
@@ -95,8 +96,8 @@ def main():
             for parent in parent_map[target]:
                 classnames = parent.get('words').split(', ')
                 for classname in classnames:
-                    #classname = '/en/' + classname.replace(' ', '_')
-                    classname = classname.replace(' ', '_')
+                    classname = '/en/' + classname.replace(' ', '_')
+                    #classname = classname.replace(' ', '_')
                     try:
                         wordvec = model[classname]
                         idx = 0
@@ -107,7 +108,7 @@ def main():
 
         if idx:
             fp.write(classid + '\n')
-        
+
         cc = cc + idx
 
     print cc
