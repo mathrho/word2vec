@@ -111,7 +111,7 @@ def main():
                         except:
                             pass
                     break
-                else
+                else:
                     print classid + '\t' + target.get('wnid') + '\t' + parent.get('wnid') + '\n'
 
         #if idx:
