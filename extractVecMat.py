@@ -57,11 +57,15 @@ def main():
 
     ##############
     #fp = open('./synset-missing-GoogleNews.txt', 'w')
-    fp = open('./synset-missing-freebase.txt', 'w')
+    #fp = open('./synset-missing-freebase.txt', 'w')
     parent_map = get_parentmap(tree)
     cc = 0
-    for classid in open('synsets.txt', 'r').readlines():
-        classid = classid.strip()
+
+    classids = open('synsets.txt', 'r').read().splitlines()
+    for classid in classids:
+
+    #for classid in open('synsets.txt', 'r').readlines():
+        #classid = classid.strip()
 
         #classid = 'n01807828'
         #for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
@@ -94,25 +98,27 @@ def main():
 
         if idx:
             for parent in parent_map[target]:
-                classnames = parent.get('words').split(', ')
-                for classname in classnames:
-                    classname = '/en/' + classname.replace(' ', '_')
-                    #classname = classname.replace(' ', '_')
-                    try:
-                        wordvec = model[classname]
-                        idx = 0
-                        #break
-                    except:
-                        pass
-                break
+                if parent.get('wnid') not in classids:
 
-        if idx:
-            fp.write(classid + '\n')
+                    classnames = parent.get('words').split(', ')
+                    for classname in classnames:
+                        classname = '/en/' + classname.replace(' ', '_')
+                        #classname = classname.replace(' ', '_')
+                        try:
+                            wordvec = model[classname]
+                            idx = 0
+                            #break
+                        except:
+                            pass
+                    break
+
+        #if idx:
+        #    fp.write(classid + '\n')
 
         cc = cc + idx
 
     print cc
-    fp.close()
+    #fp.close()
 
 if __name__ == "__main__":
     main()
