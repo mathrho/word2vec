@@ -47,8 +47,8 @@ def main():
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
     #pretrained_model = './vectors.bin'
-    pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
-    #pretrained_model = '../GoogleNews-vectors-negative300.bin'
+    #pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
+    pretrained_model = '../GoogleNews-vectors-negative300.bin'
     model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
     #model['animal']
     #print model.similarity('/en/dog', '/en/cat')
@@ -78,8 +78,8 @@ def main():
         #if target:
             classnames = target.get('words').split(', ')
             for classname in classnames:
-                classname = '/en/' + classname.replace(' ', '_')
-                #classname = classname.replace(' ', '_')
+                #classname = '/en/' + classname.replace(' ', '_')
+                classname = classname.replace(' ', '_')
                 try:
                     wordvec = model[classname]
                     idx = 0
@@ -102,8 +102,8 @@ def main():
 
                     classnames = parent.get('words').split(', ')
                     for classname in classnames:
-                        classname = '/en/' + classname.replace(' ', '_')
-                        #classname = classname.replace(' ', '_')
+                        #classname = '/en/' + classname.replace(' ', '_')
+                        classname = classname.replace(' ', '_')
                         try:
                             wordvec = model[classname]
                             idx = 0
