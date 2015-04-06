@@ -114,12 +114,15 @@ def main():
                         try:
                             wordvec = model[classname]
                             idc = 0
-                            #break
+                            break
                         except:
                             pass
-                    break
+                    #break
                 else:
                     print classid + '\t' + target.get('wnid') + '\t' + parent.get('wnid') + '\n'
+
+                if idc == 0:
+                    break
 
         #if idc:
         #    fp.write(classid + '\n')
