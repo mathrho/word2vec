@@ -85,7 +85,7 @@ def main():
             break
 
         #print dir(model)
-        if idc:
+        if False:
             classnames = target.get('words').split(', ')
             for classname in classnames:
                 namewords = classname.split(' ')
