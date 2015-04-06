@@ -84,12 +84,12 @@ def main():
                 #   print classname
             break
 
-        dir(model)
+        print dir(model)
         if idc:
             classnames = target.get('words').split(', ')
             for classname in classnames:
                 namewords = classname.split(' ')
-                wordvec = np.zeros(model.size)
+                wordvec = np.zeros(300)
                 for mameword in namewords:
                     try:
                         wordvec = np.add(wordvec, model[mameword])
