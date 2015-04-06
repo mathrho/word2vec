@@ -104,7 +104,8 @@ def main():
 
         if idc:
             for parent in parent_map[target]:
-                if parent.get('wnid') not in classids:
+                if True:
+                #if parent.get('wnid') not in classids:
 
                     classnames = parent.get('words').split(', ')
                     for classname in classnames:
