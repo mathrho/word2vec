@@ -63,8 +63,11 @@ def main():
     cc = 0
 
     classids = open('synsets.txt', 'r').read().splitlines()
-    for classid in classids:
 
+    vec_size = 300
+    word2vec_mat = np.zeros((vec_size, len(classids)))
+    clsid = 0
+    for classid in classids:
         idc = 1
         for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
             classnames = target.get('words').split(', ')
@@ -73,6 +76,7 @@ def main():
                 classname = classname.replace(' ', '_')
                 try:
                     wordvec = model[classname]
+                    word2vec_mat[:, clsid] = wordvec
                     idc = 0
                     #break
                 except:
@@ -89,7 +93,7 @@ def main():
             classnames = target.get('words').split(', ')
             for classname in classnames:
                 namewords = classname.split(' ')
-                wordvec = np.zeros(300)
+                wordvec = np.zeros(vec_size)
                 for mameword in namewords:
                     try:
                         wordvec = np.add(wordvec, model[mameword])
@@ -99,6 +103,7 @@ def main():
                         break
 
                 if idc == 0:
+                    word2vec_mat[:, clsid] = wordvec
                     break
 
 
@@ -113,6 +118,7 @@ def main():
                         classname = classname.replace(' ', '_')
                         try:
                             wordvec = model[classname]
+                            word2vec_mat[:, clsid] = wordvec
                             idc = 0
                             break
                         except:
@@ -131,6 +137,7 @@ def main():
                                     break
 
                             if idc == 0:
+                                word2vec_mat[:, clsid] = wordvec
                                 break
 
                 else:
@@ -141,7 +148,7 @@ def main():
 
         #if idc:
         #    fp.write(classid + '\n')
-
+        clsid = = clsid + 1
         cc = cc + idc
 
     print cc
