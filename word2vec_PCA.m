@@ -1,4 +1,6 @@
 load word2vec_GoogleNews.mat
+word2vec = word2vec';
+
 word2vec = normalizeColsL2(double(word2vec));
 nPCADims = 30;                                                                                                                                   
 [X, pcamap] = netpca(double(word2vec'), nPCADims);
