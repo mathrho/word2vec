@@ -23,12 +23,12 @@ def main():
     cc = 0
     clsid = 0
     vec_size = 300
-    word2vec_mat = np.zeros((vec_size, len(classnames)))
+    word2vec_mat = np.zeros((len(classnames), vec_size))
     for classname in classnames:
         idc = 1
         try:
             wordvec = model[classname]
-            word2vec_mat[:, clsid] = wordvec
+            word2vec_mat[clsid, :] = wordvec
             idc = 0
         
         except:

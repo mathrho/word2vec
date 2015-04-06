@@ -18,11 +18,12 @@ def main():
     model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
 
     ##############
-    print model.syn0.shape
-    print model.syn1.shape
+    word2vec_mat = model.syn0
+    print word2vec_mat.shape
+    #print model.syn1.shape
 
-    #np.savetxt('word2vec_GoogleNews.txt', word2vec_mat)
-    #sio.savemat('word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
+    np.savetxt('word2vec_GoogleNews.txt', word2vec_mat)
+    sio.savemat('word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
 
 if __name__ == "__main__":
     main()

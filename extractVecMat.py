@@ -61,12 +61,11 @@ def main():
     #fp = open('./synset-missing-GoogleNews.txt', 'w')
     #fp = open('./synset-missing-freebase.txt', 'w')
     parent_map = get_parentmap(tree)
-    cc = 0
-
     classids = open('synsets.txt', 'r').read().splitlines()
 
+    cc = 0
     vec_size = 300
-    word2vec_mat = np.zeros((vec_size, len(classids)))
+    word2vec_mat = np.zeros((len(classids), vec_size))
     clsid = 0
     for classid in classids:
         idc = 1
@@ -77,16 +76,11 @@ def main():
                 classname = classname.replace(' ', '_')
                 try:
                     wordvec = model[classname]
-                    word2vec_mat[:, clsid] = wordvec
+                    word2vec_mat[clsid, :] = wordvec
                     idc = 0
-                    #break
+
                 except:
                     pass
-                    #continue
-                    #print classname
-                    
-                #if classname not in model.keys():
-                #   print classname
             break
 
         #print dir(model)
@@ -104,7 +98,7 @@ def main():
                         break
 
                 if idc == 0:
-                    word2vec_mat[:, clsid] = wordvec
+                    word2vec_mat[clsid, :] = wordvec
                     break
 
 
@@ -119,7 +113,7 @@ def main():
                         classname = classname.replace(' ', '_')
                         try:
                             wordvec = model[classname]
-                            word2vec_mat[:, clsid] = wordvec
+                            word2vec_mat[clsid, :] = wordvec
                             idc = 0
                             break
                         except:
@@ -138,7 +132,7 @@ def main():
                                     break
 
                             if idc == 0:
-                                word2vec_mat[:, clsid] = wordvec
+                                word2vec_mat[clsid, :] = wordvec
                                 break
 
                 else:
