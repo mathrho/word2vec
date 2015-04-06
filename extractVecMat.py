@@ -1,8 +1,9 @@
 #/datastore/zhenyang/bin/python
 
-import gensim, logging
 import sys
 import os
+import gensim, logging
+import numpy as np
 from xml.etree import ElementTree
 
 def get_parentmap(tree):
@@ -64,18 +65,8 @@ def main():
     classids = open('synsets.txt', 'r').read().splitlines()
     for classid in classids:
 
-    #for classid in open('synsets.txt', 'r').readlines():
-        #classid = classid.strip()
-
-        #classid = 'n01807828'
-        #for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
-            #print target.get('words')
-            #for parent in parent_map[target]:
-                #print parent.get('words')
-
         idc = 1
         for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
-        #if target:
             classnames = target.get('words').split(', ')
             for classname in classnames:
                 #classname = '/en/' + classname.replace(' ', '_')
@@ -92,9 +83,24 @@ def main():
                 #if classname not in model.keys():
                 #   print classname
             break
-        #else:
-        #    print classid
-        #    cc = cc + 1
+
+
+        if idc:
+            classnames = target.get('words').split(', ')
+            for classname in classnames:
+                namewords = classname.split(' ')
+                wordvec = np.zeros(model.size)
+                for mameword in namewords:
+                    try:
+                        wordvec = np.add(wordvec, model[mameword])
+                        idc = 0
+                    except:
+                        idc = 1
+                        break
+
+                if idc == 0:
+                    break
+
 
         if idc:
             for parent in parent_map[target]:
