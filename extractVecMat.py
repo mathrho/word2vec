@@ -4,6 +4,7 @@ import sys
 import os
 import gensim, logging
 import numpy as np
+import scipy.io as sio
 from xml.etree import ElementTree
 
 def get_parentmap(tree):
@@ -152,6 +153,7 @@ def main():
         cc = cc + idc
 
     np.savetxt('synset_word2vec_GoogleNews.txt', word2vec_mat)
+    sio.savemat('synset_word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
     print cc
     #fp.close()
 
