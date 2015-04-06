@@ -73,7 +73,7 @@ def main():
             #for parent in parent_map[target]:
                 #print parent.get('words')
 
-        idx = 1
+        idc = 1
         for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
         #if target:
             classnames = target.get('words').split(', ')
@@ -82,7 +82,7 @@ def main():
                 classname = classname.replace(' ', '_')
                 try:
                     wordvec = model[classname]
-                    idx = 0
+                    idc = 0
                     #break
                 except:
                     pass
@@ -96,7 +96,7 @@ def main():
         #    print classid
         #    cc = cc + 1
 
-        if idx:
+        if idc:
             for parent in parent_map[target]:
                 if parent.get('wnid') not in classids:
 
@@ -106,7 +106,7 @@ def main():
                         classname = classname.replace(' ', '_')
                         try:
                             wordvec = model[classname]
-                            idx = 0
+                            idc = 0
                             #break
                         except:
                             pass
@@ -114,10 +114,10 @@ def main():
                 else:
                     print classid + '\t' + target.get('wnid') + '\t' + parent.get('wnid') + '\n'
 
-        #if idx:
+        #if idc:
         #    fp.write(classid + '\n')
 
-        cc = cc + idx
+        cc = cc + idc
 
     print cc
     #fp.close()
