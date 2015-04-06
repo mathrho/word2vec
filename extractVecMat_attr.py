@@ -35,8 +35,8 @@ def main():
             print classname
             pass
 
-    clsid = clsid + 1
-    cc = cc + idc
+        clsid = clsid + 1
+        cc = cc + idc
 
     np.savetxt('attr_word2vec_GoogleNews.txt', word2vec_mat)
     sio.savemat('attr_word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
