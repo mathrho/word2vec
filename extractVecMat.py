@@ -148,7 +148,7 @@ def main():
 
         #if idc:
         #    fp.write(classid + '\n')
-        clsid = = clsid + 1
+        clsid = clsid + 1
         cc = cc + idc
 
     print cc
