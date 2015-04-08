@@ -72,13 +72,14 @@ def main():
                         word2vec_map[c] = [classid]
 
                     idc = 0
+                    break
 
                 except:
                     pass
             break
 
         #print dir(model)
-        if idc:
+        if idc>0:
             classnames = target.get('words').split(', ')
             for classname in classnames:
                 namewords = classname.split(' ')
@@ -102,7 +103,7 @@ def main():
                         word2vec_map[c] = [classid]
                     break
 
-        if idc:
+        if idc>0:
             for parent in parent_map[target]:
                 if True:
                 #if parent.get('wnid') not in classids:
@@ -127,7 +128,7 @@ def main():
                         except:
                             pass
                     
-                    if idc:
+                    if idc>0:
                         for classname in classnames:
                             namewords = classname.split(' ')
                             wordvec = np.zeros(300)
