@@ -179,8 +179,9 @@ def main():
     classids_filtered = []
     for classid in word2vec_map.keys():
         classids_filtered.append(word2vec_map[classid][0])
+    classids_filtered = sorted(classids_filtered)
     fp = open('./synset-word2vec-filtered.txt', 'w')
-    for classid in classids_filtered.sort():
+    for classid in classids_filtered:
         fp.write(classid + '\n')
     fp.close()
 
