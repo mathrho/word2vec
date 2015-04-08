@@ -1,4 +1,4 @@
-#/datastore/zhenyang/bin/python
+#!/datastore/zhenyang/bin/ python
 
 import sys
 import os
@@ -64,9 +64,9 @@ def main():
     classids = open('synsets.txt', 'r').read().splitlines()
 
     cc = 0
+    clsid = 0
     vec_size = 300
     word2vec_mat = np.zeros((len(classids), vec_size))
-    clsid = 0
     for classid in classids:
         idc = 1
         for target in synsets.findall(".//synset[@wnid='" + classid + "']"):
@@ -78,13 +78,15 @@ def main():
                     wordvec = model[classname]
                     word2vec_mat[clsid, :] = wordvec
                     idc = 0
+                    break
 
                 except:
                     pass
             break
 
+
         #print dir(model)
-        if idc:
+        if idc>0:
             classnames = target.get('words').split(', ')
             for classname in classnames:
                 namewords = classname.split(' ')
@@ -102,11 +104,10 @@ def main():
                     break
 
 
-        if idc:
+        if idc>0:
             for parent in parent_map[target]:
-                if True:
                 #if parent.get('wnid') not in classids:
-
+                if True:
                     classnames = parent.get('words').split(', ')
                     for classname in classnames:
                         #classname = '/en/' + classname.replace(' ', '_')
@@ -119,7 +120,7 @@ def main():
                         except:
                             pass
                     
-                    if idc:
+                    if idc>0:
                         for classname in classnames:
                             namewords = classname.split(' ')
                             wordvec = np.zeros(300)
@@ -141,7 +142,7 @@ def main():
                 if idc == 0:
                     break
 
-        #if idc:
+        #if idc == 0:
         #    fp.write(classid + '\n')
         clsid = clsid + 1
         cc = cc + idc
