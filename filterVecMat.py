@@ -171,7 +171,7 @@ def main():
 
     fp = open('./synset-word2vec-map.txt', 'w')
     for classid in word2vec_map.keys():
-        fp.write(classid + '\t' + '\t'.join(word2vec_map[classid]) + '\n')
+        fp.write(classid + '\t' + ','.join(word2vec_map[classid]) + '\n')
     fp.close()
 
 if __name__ == "__main__":
