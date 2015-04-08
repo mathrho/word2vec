@@ -51,6 +51,7 @@ def main():
     clsid = 0
     vec_size = 300
     word2vec_classids = {}
+    word2vec_map = {}
     word2vec_mat = np.zeros((len(classids), vec_size))
     for classid in classids:
         idc = 1
@@ -62,7 +63,14 @@ def main():
                 try:
                     wordvec = model[classname]
                     word2vec_mat[clsid, :] = wordvec
-                    word2vec_classids[classid] = target.get('wnid')
+                    ##
+                    c = target.get('wnid')
+                    word2vec_classids[classid] = c
+                    if c in word2vec_map:
+                        word2vec_map[c].append(classid)
+                    else:
+                        word2vec_map[c] = [classid]
+
                     idc = 0
 
                 except:
@@ -85,7 +93,13 @@ def main():
 
                 if idc == 0:
                     word2vec_mat[clsid, :] = wordvec
-                    word2vec_classids[classid] = target.get('wnid')
+                    ##
+                    c = target.get('wnid')
+                    word2vec_classids[classid] = c
+                    if c in word2vec_map:
+                        word2vec_map[c].append(classid)
+                    else:
+                        word2vec_map[c] = [classid]
                     break
 
         if idc:
@@ -100,7 +114,14 @@ def main():
                         try:
                             wordvec = model[classname]
                             word2vec_mat[clsid, :] = wordvec
-                            word2vec_classids[classid] = parent.get('wnid')
+                            ##
+                            c = parent.get('wnid')
+                            word2vec_classids[classid] = c
+                            if c in word2vec_map:
+                                word2vec_map[c].append(classid)
+                            else:
+                                word2vec_map[c] = [classid]
+
                             idc = 0
                             break
                         except:
@@ -120,7 +141,14 @@ def main():
 
                             if idc == 0:
                                 word2vec_mat[clsid, :] = wordvec
-                                word2vec_classids[classid] = parent.get('wnid')
+                                ##
+                                c = parent.get('wnid')
+                                word2vec_classids[classid] = c
+                                if c in word2vec_map:
+                                    word2vec_map[c].append(classid)
+                                else:
+                                    word2vec_map[c] = [classid]
+
                                 break
 
                 else:
@@ -139,6 +167,11 @@ def main():
     fp = open('./synset-filtered.txt', 'w')
     for classid in classids:
         fp.write(classid + '\t' + word2vec_classids[classid] + '\n')
+    fp.close()
+
+    fp = open('./synset-word2vec-map.txt', 'w')
+    for classid in word2vec_map.keys():
+        fp.write(classid + '\t' + '\t'.join(word2vec_map[classid]) + '\n')
     fp.close()
 
 if __name__ == "__main__":
