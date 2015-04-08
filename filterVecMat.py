@@ -165,7 +165,7 @@ def main():
     #sio.savemat('synset_word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
     print cc
 
-    fp = open('./synset-filtered.txt', 'w')
+    fp = open('./synset-word2vec.txt', 'w')
     for classid in classids:
         fp.write(classid + '\t' + word2vec_classids[classid] + '\n')
     fp.close()
@@ -173,6 +173,15 @@ def main():
     fp = open('./synset-word2vec-map.txt', 'w')
     for classid in word2vec_map.keys():
         fp.write(classid + '\t' + ','.join(word2vec_map[classid]) + '\n')
+    fp.close()
+
+    #
+    classids_filtered = []
+    for classid in word2vec_map.keys():
+        classids_filtered.append(word2vec_map[classid][0])
+    fp = open('./synset-word2vec-filtered.txt', 'w')
+    for classid in classids_filtered.sort():
+        fp.write(classid + '\n')
     fp.close()
 
 if __name__ == "__main__":
