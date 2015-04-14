@@ -1,0 +1,16 @@
+Color: black, blue, brown, gray, green, orange, pink, red, violet, white, yellow
+Pattern: spotted, striped
+Shape: long, round, rectangular, square
+Texture: furry, smooth, rough, shiny, metallic, vegetation, wooden, wet
+
+
+round 14
+spotted 17
+wooden 24
+yellow 25
+
+
+ball 237
+Giraffe 188
+marimba 265
+sunflower 381
