@@ -1,4 +1,5 @@
 *.bin
+yahoo_100m_words.output
 news.2012.en.*
 text8
 word2vec_GoogleNews.mat

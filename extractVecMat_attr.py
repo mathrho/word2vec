@@ -14,7 +14,8 @@ def main():
 
     #pretrained_model = './vectors.bin'
     #pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
-    pretrained_model = '../GoogleNews-vectors-negative300.bin'
+    #pretrained_model = '../GoogleNews-vectors-negative300.bin'
+    pretrained_model = '../yahoo_100m_words.output'
     model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
 
     ##############
@@ -38,8 +39,10 @@ def main():
         clsid = clsid + 1
         cc = cc + idc
 
-    np.savetxt('attr_word2vec_GoogleNews.txt', word2vec_mat)
-    sio.savemat('attr_word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
+    #np.savetxt('attr_word2vec_GoogleNews.txt', word2vec_mat)
+    #sio.savemat('attr_word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
+    np.savetxt('attr_word2vec_yahoo.txt', word2vec_mat)
+    sio.savemat('attr_word2vec_yahoo.mat', {'word2vec':word2vec_mat})
     print cc
 
 if __name__ == "__main__":
