@@ -68,7 +68,7 @@ def main():
 
     cc = 0
     clsid = 0
-    vec_size = 300
+    vec_size = 30
     word2vec_mat = np.zeros((len(classids), vec_size))
     for classid in classids:
         idc = 1

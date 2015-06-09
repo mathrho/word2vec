@@ -25,7 +25,7 @@ def main():
 
     cc = 0
     clsid = 0
-    vec_size = 500
+    vec_size = 30
     word2vec_mat = np.zeros((len(classnames), vec_size))
     for classname in classnames:
         idc = 1
