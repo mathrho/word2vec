@@ -50,8 +50,11 @@ def main():
 
     #pretrained_model = './vectors.bin'
     #pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
-    pretrained_model = '../GoogleNews-vectors-negative300.bin'
-    model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
+    #pretrained_model = '../GoogleNews-vectors-negative300.bin'
+    #model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
+    pretrained_model = '../yahoo_100m_words_30d.output'
+    model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=False)
+
     #model['animal']
     #print model.similarity('/en/dog', '/en/cat')
     #print model.similarity('/en/dog', '/en/mountain')
@@ -147,8 +150,10 @@ def main():
         clsid = clsid + 1
         cc = cc + idc
 
-    np.savetxt('synset_word2vec_GoogleNews.txt', word2vec_mat)
-    sio.savemat('synset_word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
+    #np.savetxt('synset_word2vec_GoogleNews.txt', word2vec_mat)
+    #sio.savemat('synset_word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
+    np.savetxt('synset_word2vec_yahoo_30d.txt', word2vec_mat)
+    sio.savemat('synset_word2vec_yahoo_30d.mat', {'word2vec':word2vec_mat})
     print cc
     #fp.close()
 

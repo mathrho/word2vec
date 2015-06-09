@@ -17,7 +17,7 @@ def main():
     #pretrained_model = '../GoogleNews-vectors-negative300.bin'
     #model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
     #pretrained_model = './vectors.output'
-    pretrained_model = '../yahoo_100m_words.output'
+    pretrained_model = '../yahoo_100m_words_30d.output'
     model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=False)
 
     ##############
@@ -43,8 +43,8 @@ def main():
 
     #np.savetxt('attr_word2vec_GoogleNews.txt', word2vec_mat)
     #sio.savemat('attr_word2vec_GoogleNews.mat', {'word2vec':word2vec_mat})
-    np.savetxt('attr_word2vec_yahoo.txt', word2vec_mat)
-    sio.savemat('attr_word2vec_yahoo.mat', {'word2vec':word2vec_mat})
+    np.savetxt('attr_word2vec_yahoo_30d.txt', word2vec_mat)
+    sio.savemat('attr_word2vec_yahoo_30d.mat', {'word2vec':word2vec_mat})
     print cc
 
 if __name__ == "__main__":
