@@ -16,8 +16,8 @@ def main():
     #pretrained_model = '../freebase-vectors-skipgram1000-en.bin'
     #pretrained_model = '../GoogleNews-vectors-negative300.bin'
     #model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=True)
-    pretrained_model = './vectors.output'
-    #pretrained_model = '../yahoo_100m_words_30d.output'
+    #pretrained_model = './vectors.output'
+    pretrained_model = '../yahoo_100m_words_30d.output'
     model = gensim.models.Word2Vec.load_word2vec_format(pretrained_model, binary=False)
 
     ##############
