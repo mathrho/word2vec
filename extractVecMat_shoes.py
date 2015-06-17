@@ -29,9 +29,9 @@ def main():
     word2vec_mat = np.zeros((len(classnames), vec_size))
     for classname in classnames:
         idc = 1
-        for cls in classname.split(';')
+        for cls in classname.split(';'):
             wordvec = np.zeros(1, vec_size))
-            for cls_word in cls.split(' ')
+            for cls_word in cls.split(' '):
                 try:
                     np.add(wordvec, model[cls_word])
                     idc = 0
