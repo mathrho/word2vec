@@ -1,0 +1,9 @@
+boots
+fashion sneakers
+flats
+loafers;slip-ons
+mules;clogs
+oxfords
+pumps
+sandals
+slippers
