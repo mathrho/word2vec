@@ -33,7 +33,7 @@ def main():
             wordvec = np.zeros(1, vec_size))
             for cls_word in cls.split(' '):
                 try:
-                    np.add(wordvec, model[cls_word])
+                    wordvec = np.add(wordvec, model[cls_word])
                     idc = 0
                 
                 except:
