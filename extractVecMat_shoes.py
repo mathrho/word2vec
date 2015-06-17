@@ -30,7 +30,7 @@ def main():
     for classname in classnames:
         idc = 1
         for cls in classname.split(';'):
-            wordvec = np.zeros(1, vec_size))
+            wordvec = np.zeros(1, vec_size)
             for cls_word in cls.split(' '):
                 try:
                     wordvec = np.add(wordvec, model[cls_word])
